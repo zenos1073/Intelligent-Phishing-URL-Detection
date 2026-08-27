@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Create account · PhishGuard{% endblock %}
+{% block content %}
+<section class="auth-wrap"><div class="auth-card"><p class="eyebrow">Scan history</p><h1>Create your account</h1><p>Save the links you analyse and return to them whenever you need.</p>
+  <form method="post" class="stacked-form"><label>Name<input type="text" name="name" autocomplete="name" minlength="2" required></label><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Password<input type="password" name="password" autocomplete="new-password" minlength="8" required></label><button type="submit">Create account</button></form>
+  <p class="form-footer">Already registered? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
+</div></section>
+{% endblock %}
