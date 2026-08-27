@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Admin analytics · PhishGuard{% endblock %}
+{% block content %}
+<section class="page-heading"><p class="eyebrow">Administration</p><h1>Detection analytics</h1><p>Overview of logged scans across all registered users.</p></section>
+<section class="stats"><article><span>{{ totals.total or 0 }}</span><p>Total scans</p></article><article><span>{{ totals.phishing or 0 }}</span><p>Flagged as phishing</p></article><article><span>{{ totals.legitimate or 0 }}</span><p>Flagged as legitimate</p></article></section>
+<section class="admin-grid"><div class="detail-card"><h2>Recent daily activity</h2>{% if daily %}<table class="compact"><thead><tr><th>Date</th><th>Scans</th><th>Suspicious</th></tr></thead><tbody>{% for row in daily %}<tr><td>{{ row.day }}</td><td>{{ row.total }}</td><td>{{ row.phishing or 0 }}</td></tr>{% endfor %}</tbody></table>{% else %}<p>No scan data yet.</p>{% endif %}</div><div class="detail-card"><h2>Administrator actions</h2><p>Use the CLI command below from the project folder to create an administrator after initial setup.</p><code>flask --app run.py create-admin</code><p class="quiet">Only administrator accounts can view this page.</p></div></section>
+<section class="detail-card"><h2>Latest scans</h2>{% if recent %}<div class="table-wrap"><table><thead><tr><th>Link</th><th>User</th><th>Result</th><th>When</th></tr></thead><tbody>{% for scan in recent %}<tr><td class="url-cell">{{ scan.url }}</td><td>{{ scan.email or 'Guest' }}</td><td><span class="status {{ scan.risk_level }}">{{ scan.verdict }}</span></td><td>{{ scan.scanned_at[:16].replace('T', ' ') }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p>No scan data yet.</p>{% endif %}</section>
+{% endblock %}
