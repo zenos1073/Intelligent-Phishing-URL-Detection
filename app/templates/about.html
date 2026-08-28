@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}About — PhishGuard{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+  <p class="eyebrow">About PhishGuard</p>
+
+  <h1>Understand suspicious URLs before you trust them.</h1>
+
+  <p>
+    PhishGuard is an AI-assisted phishing URL detection system developed
+    as an MCA final-year project. It analyzes the structure of a submitted
+    URL and provides a risk assessment without opening the website.
+  </p>
+</section>
+
+<section class="result-grid">
+  <article class="detail-card">
+    <h2>What PhishGuard does</h2>
+    <p>
+      The system examines URL-based characteristics such as URL length,
+      subdomains, IP-address domains, digits, parameters, obfuscation
+      patterns, and HTTPS usage to identify suspicious patterns.
+    </p>
+  </article>
+
+  <article class="detail-card">
+    <h2>Safe URL analysis</h2>
+    <p>
+      PhishGuard does not visit the submitted website during analysis.
+      This allows the URL structure to be examined without directly
+      exposing the application to the destination page.
+    </p>
+  </article>
+
+  <article class="detail-card">
+    <h2>Risk results</h2>
+    <p>
+      Each scan provides a risk level and supporting information to help
+      users understand why a URL may be suspicious.
+    </p>
+  </article>
+
+  <article class="detail-card">
+    <h2>Project technology</h2>
+    <p>
+      The application uses Flask for the web application, machine-learning
+      techniques for URL classification, Firebase for cloud data services,
+      and Render for deployment.
+    </p>
+  </article>
+</section>
+{% endblock %}

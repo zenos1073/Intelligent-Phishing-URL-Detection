@@ -38,6 +38,9 @@ def load_logged_in_user():
 def index():
     return render_template("index.html")
 
+@main_bp.route("/about")
+def about():
+    return render_template("about.html")
 
 @main_bp.route("/scan", methods=("POST",))
 def scan():
