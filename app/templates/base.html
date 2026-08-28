@@ -15,11 +15,17 @@
       </a>
 
       <nav>
-        <a href="{{ url_for('main.index') }}">Scan URL</a>
+    <a href="{{ url_for('main.index') }}">Scan URL</a>
 
-        {% if g.user %}
-          <span class="user-name">Hi, {{ g.user['name'] }}</span>
+    {% if g.user %}
+      <span class="user-name">Hi, {{ g.user['name'] }}</span>
 
+      <div class="mobile-menu">
+        <button class="menu-toggle" type="button" onclick="toggleMenu()">
+          ☰
+        </button>
+
+        <div class="menu-dropdown" id="mobileMenu">
           <a href="{{ url_for('main.dashboard') }}">My history</a>
 
           {% if g.user['is_admin'] %}
@@ -31,16 +37,48 @@
             action="{{ url_for('auth.logout') }}"
             method="post"
           >
-            <button class="nav-button" type="submit">Sign out</button>
+            <button class="menu-button" type="submit">Sign out</button>
           </form>
+        </div>
+      </div>
 
-        {% else %}
-          <a href="{{ url_for('auth.login') }}">Sign in</a>
-          <a class="nav-cta" href="{{ url_for('auth.register') }}">
-            Create account
-          </a>
+      <!-- Desktop links -->
+      <div class="desktop-links">
+        <a href="{{ url_for('main.dashboard') }}">My history</a>
+
+        {% if g.user['is_admin'] %}
+          <a href="{{ url_for('main.admin') }}">Admin</a>
         {% endif %}
-      </nav>
+
+        <form
+          class="inline-form"
+          action="{{ url_for('auth.logout') }}"
+          method="post"
+        >
+          <button class="nav-button" type="submit">Sign out</button>
+        </form>
+      </div>
+
+    {% else %}
+      <div class="desktop-links">
+        <a href="{{ url_for('auth.login') }}">Sign in</a>
+        <a class="nav-cta" href="{{ url_for('auth.register') }}">
+          Create account
+        </a>
+      </div>
+
+      <div class="mobile-menu">
+        <button class="menu-toggle" type="button" onclick="toggleMenu()">
+          ☰
+        </button>
+
+        <div class="menu-dropdown" id="mobileMenu">
+          <a href="{{ url_for('auth.login') }}">Sign in</a>
+          <a href="{{ url_for('auth.register') }}">Create account</a>
+        </div>
+      </div>
+    {% endif %}
+</nav>
     </header>
 
     <main>
@@ -56,5 +94,25 @@
     <footer>
       PhishGuard analyses URL structure only. A result is a risk signal, not a guarantee of safety.
     </footer>
+    <script>
+  function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("show");
+  }
+
+  document.addEventListener("click", function (event) {
+    const menu = document.getElementById("mobileMenu");
+    const button = document.querySelector(".menu-toggle");
+
+    if (
+      menu &&
+      !menu.contains(event.target) &&
+      button &&
+      !button.contains(event.target)
+    ) {
+      menu.classList.remove("show");
+    }
+  });
+</script>
   </body>
 </html>
