@@ -25,20 +25,29 @@ FEATURE_COLUMNS = [
 
 
 def normalise_url(value, max_length=2_048):
-    """Validate a user URL without making a network request."""
+    """Validate and standardise a user URL without making a network request."""
+
     url = (value or "").strip()
+
     if not url:
         raise ValueError("Enter a URL to scan.")
+
     if not re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", url):
         url = f"https://{url}"
 
     parsed = urlparse(url)
+
     if parsed.scheme not in {"http", "https"} or not parsed.hostname:
         raise ValueError("Enter a complete HTTP or HTTPS URL.")
+
     if max_length is not None and len(url) > max_length:
         raise ValueError("The URL is too long to scan.")
-    return url
 
+    # Treat a domain with and without a trailing slash as the same URL.
+    if not parsed.path:
+        url = url + "/"
+
+    return url
 
 def _is_ip_address(hostname):
     try:
