@@ -1,4 +1,4 @@
-# PhishGuard — AI-Based Phishing Detection
+SafeLink — AI-Based Phishing Detection
 
 This MCA project is a Flask web application that assesses phishing risk in a submitted URL, explains the structural warning signs, stores account scan histories, and provides an administrator analytics view.
 

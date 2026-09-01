@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI-assisted phishing URL detection">
-  <title>{% block title %}PhishGuard{% endblock %}</title>
+  <title>{% block title %}SafeLink{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
   <header class="site-header">
     <a class="brand" href="{{ url_for('main.index') }}">
-      <span>◈</span> PhishGuard
-    </a>
+    <img src="{{ url_for('static', filename='1-removebg-preview.png') }}"
+         alt="SafeLink Logo">
+    <span class="brand-name">SafeLink</span>
+</a>
 
     <nav>
       <a href="{{ url_for('main.index') }}">Scan URL</a>
@@ -154,7 +156,7 @@
   </main>
 
   <footer>
-    PhishGuard analyses URL structure only.
+    SafeLink analyses URL structure only.
     A result is a risk signal, not a guarantee of safety.
   </footer>
 
