@@ -9,23 +9,34 @@
 </head>
 
 <body>
+
   <header class="site-header">
+
     <a class="brand" href="{{ url_for('main.index') }}">
-    <img src="{{ url_for('static', filename='1-removebg-preview.png') }}"
-         alt="SafeLink Logo">
-    <span class="brand-name">SafeLink</span>
-</a>
+      <img
+        src="{{ url_for('static', filename='1-removebg-preview.png') }}"
+        alt="SafeLink Logo"
+      >
+      <span class="brand-name">SafeLink</span>
+    </a>
 
     <nav>
-      <a href="{{ url_for('main.index') }}">Scan URL</a>
-      <a href="{{ url_for('main.about') }}">About</a>
+
+      <!-- Scan URL -->
+      <a href="{{ url_for('main.index') }}">
+        Scan URL
+      </a>
 
       {% if g.user %}
 
-        <span class="user-name">Hi, {{ g.user['name'] }}</span>
+        <!-- Logged-in user -->
+        <span class="user-name">
+          Hi, {{ g.user['name'] }}
+        </span>
 
         <!-- Mobile menu -->
         <div class="mobile-menu">
+
           <button
             class="menu-toggle"
             type="button"
@@ -37,26 +48,33 @@
 
           <div class="menu-dropdown" id="mobileMenu">
 
+            <!-- About -->
             <a href="{{ url_for('main.about') }}">
               About
             </a>
 
+            <!-- My history -->
             <a href="{{ url_for('main.dashboard') }}">
               My history
             </a>
 
+            <!-- Admin -->
             {% if g.user['is_admin'] %}
               <a href="{{ url_for('main.admin') }}">
                 Admin
               </a>
             {% endif %}
 
+            <!-- Sign out -->
             <form
               class="inline-form"
               action="{{ url_for('auth.logout') }}"
               method="post"
             >
-              <button class="menu-button" type="submit">
+              <button
+                class="menu-button"
+                type="submit"
+              >
                 Sign out
               </button>
             </form>
@@ -67,22 +85,33 @@
         <!-- Desktop links -->
         <div class="desktop-links">
 
+          <!-- About -->
+          <a href="{{ url_for('main.about') }}">
+            About
+          </a>
+
+          <!-- My history -->
           <a href="{{ url_for('main.dashboard') }}">
             My history
           </a>
 
+          <!-- Admin -->
           {% if g.user['is_admin'] %}
             <a href="{{ url_for('main.admin') }}">
               Admin
             </a>
           {% endif %}
 
+          <!-- Sign out -->
           <form
             class="inline-form"
             action="{{ url_for('auth.logout') }}"
             method="post"
           >
-            <button class="nav-button" type="submit">
+            <button
+              class="nav-button"
+              type="submit"
+            >
               Sign out
             </button>
           </form>
@@ -94,10 +123,17 @@
         <!-- Desktop links -->
         <div class="desktop-links">
 
+          <!-- About -->
+          <a href="{{ url_for('main.about') }}">
+            About
+          </a>
+
+          <!-- Sign in -->
           <a href="{{ url_for('auth.login') }}">
             Sign in
           </a>
 
+          <!-- Create account -->
           <a
             class="nav-cta"
             href="{{ url_for('auth.register') }}"
@@ -121,14 +157,17 @@
 
           <div class="menu-dropdown" id="mobileMenu">
 
+            <!-- About -->
             <a href="{{ url_for('main.about') }}">
               About
             </a>
 
+            <!-- Sign in -->
             <a href="{{ url_for('auth.login') }}">
               Sign in
             </a>
 
+            <!-- Create account -->
             <a href="{{ url_for('auth.register') }}">
               Create account
             </a>
@@ -138,38 +177,55 @@
         </div>
 
       {% endif %}
+
     </nav>
+
   </header>
+
 
   <main>
 
+    <!-- Flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
+
       {% for category, message in messages %}
+
         <div class="flash {{ category }}">
           {{ message }}
         </div>
+
       {% endfor %}
+
     {% endwith %}
 
+
+    <!-- Page content -->
     {% block content %}{% endblock %}
 
   </main>
+
 
   <footer>
     SafeLink analyses URL structure only.
     A result is a risk signal, not a guarantee of safety.
   </footer>
 
+
   <script>
+
     function toggleMenu() {
+
       const menu = document.getElementById("mobileMenu");
 
       if (menu) {
         menu.classList.toggle("show");
       }
+
     }
 
+
     document.addEventListener("click", function (event) {
+
       const menu = document.getElementById("mobileMenu");
       const button = document.querySelector(".menu-toggle");
 
@@ -179,9 +235,13 @@
         button &&
         !button.contains(event.target)
       ) {
+
         menu.classList.remove("show");
+
       }
+
     });
+
   </script>
 
 </body>
