@@ -1,6 +1,6 @@
 SafeLink — AI-Based Phishing Detection
 
-This MCA project is a Flask web application that assesses phishing risk in a submitted URL, explains the structural warning signs, stores account scan histories, and provides an administrator analytics view.
+This project is a Flask web application that assesses phishing risk in a submitted URL, explains the structural warning signs, stores account scan histories, and provides an administrator analytics view.
 
 The scanner does **not** visit the submitted address. It works entirely from URL-lexical features—such as length, nested subdomains, IP-address domains, obfuscation, digits, parameters, and HTTPS—so the analysis itself does not expose the user to the untrusted page.
 
